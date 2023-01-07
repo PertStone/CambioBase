@@ -42,15 +42,18 @@ namespace CambioBase
             var sGuardaCoeficientes = "";
 
             while (true)
-            {
+            {   // Procesos algoritmicos para obtener el residuo y cociente
                 var sQuociente = auxiliar / _base;
 
                 var sResiduo = auxiliar - (_base * sQuociente);
                 lResiduo.Add(sResiduo);
                 auxiliar = sQuociente;
 
+                // dibujado en la tabla 
                 PrintLine();
                 PrintRow(sNumero.ToString()+":"+_base,sQuociente.ToString(), sResiduo.ToString());
+
+                // concatenacion del resultado final
                 sNumero = auxiliar;
                 if (auxiliar < _base)
                 {                    
@@ -62,16 +65,19 @@ namespace CambioBase
                     break;
                 }
             }
+            //retorno del resultado final reversado
+            //
             Console.WriteLine("\n Por tanto " + NumeroOriginal + " en base 10 = " + Reverse(sGuardaCoeficientes) + " en base " + _base);
         }
 
-
+        //dibujado de las filas
+        //
         static void PrintLine()
         {
             Console.WriteLine(new string('-', tableWidth));
         }
 
-
+        //dibujado de la columnas 
         static void PrintRow(params string[] columns)
         {
             int width = (tableWidth - columns.Length) / columns.Length;
@@ -85,7 +91,8 @@ namespace CambioBase
             Console.WriteLine(row);
 
         }
-
+        //aliniacion de la tabla
+        //
         static string Aligncenter(string text, int width)
         {
             text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
@@ -100,7 +107,8 @@ namespace CambioBase
                 return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
             }
         }
-
+        //metodo usado para reversar el resultado final 
+        //
         static string Reverse(string str)
         {
             char[] chars = str.ToCharArray();
